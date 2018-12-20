@@ -1,0 +1,30 @@
+<div class="modal-header">
+	<h4 class="modal-title">Créer un créneau</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<p>{{ data.date | date : "EEEE d MMMM y" }}</p>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<div class="row">
+			<div class="form-group col-6">
+				<label for="start">Début</label>
+				<ngb-timepicker formControlName="start"></ngb-timepicker>
+			</div>
+			<div class="form-group col-6">
+				<label for="end">Fin</label>
+				<ngb-timepicker formControlName="end"></ngb-timepicker>
+			</div>
+		</div>
+		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success">Confirmer</button>
+	</form>
+
+	<button class="btn btn-danger" (click)="deleteEvent(eventId)">Supprimer</button>
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger" (click)="activeModal.dismiss('Close clicked')">
+		Annuler
+	</button>
+</div>

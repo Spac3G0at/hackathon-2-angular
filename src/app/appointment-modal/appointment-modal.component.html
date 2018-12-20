@@ -1,0 +1,51 @@
+<div class="modal-header">
+	<h4 class="modal-title">Prendre un rendez-vous</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<p>{{ data.event.start | date : "EEEE d MMMM y" }}</p>
+	<p>De {{ data.event.start | date : 'HH:mm' }} à {{ data.event.end | date : 'HH:mm' }}</p>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<div class="form-group">
+			<label for="lastName">
+				Nom
+			</label>
+			<input class="form-control" type="text" formControlName="lastName">
+		</div>
+		<div class="form-group">
+			<label for="firstName">
+				Prénom
+			</label>
+			<input class="form-control" type="text" formControlName="firstName">
+		</div>
+		<div class="form-group">
+			<label for="company">
+				Entreprise
+			</label>
+			<input class="form-control" type="text" formControlName="company" placeholder="facultatif">
+		</div>
+		<div class="form-group">
+			<label for="mail">
+				Email
+			</label>
+			<input class="form-control" type="email" formControlName="mail">
+		</div>
+		<div class="form-group">
+			<label for="sujet">
+				Sujet
+			</label>
+			<input class="form-control" type="text" formControlName="subject">
+		</div>
+
+		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success">Confirmer</button>
+	</form>
+
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-danger" (click)="activeModal.dismiss('Close clicked')">
+		Annuler
+	</button>
+</div>
