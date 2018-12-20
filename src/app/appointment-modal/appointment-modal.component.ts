@@ -56,6 +56,9 @@ export class AppointmentModalComponent implements OnInit {
 			},
 			summary: `RDV avec ${data.firstName} ${data.lastName}`,
 			colorId: '3',
+			attendees: [{
+				email: data.mail
+			}]
 		};
 		this.service.updateEvent(event, this.eventId);
 
