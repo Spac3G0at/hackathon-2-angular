@@ -47,4 +47,10 @@ export class CalendrierService {
 		});
 	}
 
+	confirm(eventId, event) {
+		this._http.put('/api/events/confirm/' + eventId, event, {responseType: 'text'}).subscribe(x => {
+			console.log(x);
+		});
+	}
+
 }

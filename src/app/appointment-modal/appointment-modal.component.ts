@@ -55,7 +55,7 @@ export class AppointmentModalComponent implements OnInit {
 				dateTime: this.data.event.end.toISOString(),
 			},
 			summary: `RDV avec ${data.firstName} ${data.lastName}`,
-			colorId: '3',
+			colorId: '5',
 			attendees: [{
 				email: data.mail
 			}]

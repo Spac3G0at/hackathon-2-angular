@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CalendrierService } from '../../common/calendrier.service';
+import { HttpClient } from 'selenium-webdriver/http';
 
 @Component({
 	selector: 'app-update-modal',
@@ -65,10 +66,31 @@ export class UpdateModalComponent implements OnInit {
 			end: {
 				dateTime: endDate,
 			},
-			colorId: '2',
+			colorId: this.data.event.colorId,
+			summary: this.data.event.summary,
+			attendees: this.data.event.attendees
 		};
 		this.service.updateEvent(event, this.eventId);
 		this.closeModal();
+	}
+
+	confirm(eventId, eventData) {
+		// const event = eventData;
+		// event.colorId = '1';
+		// console.log(eventData);
+
+		const event = {
+			start: {
+				dateTime: eventData.start.toISOString(),
+			},
+			end: {
+				dateTime: eventData.end.toISOString(),
+			},
+			colorId: '1',
+			summary: eventData.summary,
+			attendees: eventData.attendees
+		};
+		this.service.confirm(eventId, event);
 	}
 
 }

@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<h4 class="modal-title">Créer un créneau</h4>
+	<h4 class="modal-title">Modifier</h4>
 	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -21,6 +21,8 @@
 	</form>
 
 	<button class="btn btn-danger" (click)="deleteEvent(eventId)">Supprimer</button>
+	<button *ngIf="data.event.colorId === '5'" class="btn btn-success" (click)="confirm(data.event.id, data.event)">Confirmer le rendez-vous</button>
+	<button *ngIf="data.event.colorId === '1'" class="btn btn-success">Annuler le rendez-vous</button>
 
 </div>
 <div class="modal-footer">

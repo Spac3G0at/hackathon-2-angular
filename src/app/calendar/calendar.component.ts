@@ -8,6 +8,7 @@ import { CalendrierService } from '../common/calendrier.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
 
+import { colors } from '../common/colors';
 
 @Component({
 	selector: 'app-calendar',
@@ -40,8 +41,8 @@ export class CalendarComponent implements OnInit {
 			this.events.map(x => {
 				x.start = new Date(x.start.dateTime);
 				x.end = new Date(x.end.dateTime);
-				x.title = x.summary;
 				x.colorId = x.colorId ? x.colorId : '1';
+				x.color = colors.green;
 			});
 			this.events = this.events.filter(y => y.colorId === '2');
 

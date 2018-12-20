@@ -8,7 +8,7 @@ import { CalendrierService } from '../../common/calendrier.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../modal/modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
-
+import { colors } from '../../common/colors';
 
 @Component({
 	selector: 'app-admin-calendar',
@@ -42,7 +42,12 @@ export class AdminCalendarComponent implements OnInit {
 				x.start = new Date(x.start.dateTime);
 				x.end = new Date(x.end.dateTime);
 				x.title = x.summary;
-				x.colorId = x.colorId ? x.colorId : '1';
+				console.log(x.title + x.colorId);
+				if (x.colorId === '2') {
+					x.color = colors.green;
+				} else if (x.colorId === '5') {
+					x.color = colors.yellow;
+				}
 			});
 		});
 	}
