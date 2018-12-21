@@ -7,7 +7,7 @@ import {
 import { CalendrierService } from '../common/calendrier.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
-import { map, filter, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { colors } from '../common/colors';
 
 @Component({
@@ -36,7 +36,6 @@ export class CalendarComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		this.events = this.service.events.pipe(
 			map((x: any) => {
 				return x.filter(evt => {

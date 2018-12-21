@@ -69,7 +69,7 @@ export class UpdateModalComponent implements OnInit {
 			attendees: this.data.event.attendees,
 			description: this.data.event.description
 		};
-		this.service.updateEvent(event, this.eventId);
+		this.service.editEvent(event, this.eventId);
 		this.closeModal();
 	}
 

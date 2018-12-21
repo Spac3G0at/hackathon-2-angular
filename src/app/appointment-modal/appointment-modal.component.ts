@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CalendrierService } from '../common/calendrier.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-appointment-modal',
@@ -70,6 +71,10 @@ export class AppointmentModalComponent implements OnInit {
 		this.service.updateEvent(event, this.eventId);
 
 		this.closeModal();
+		Swal({
+			type: 'success',
+			title: 'Votre demande a bien été enregistrée !'
+		});
 	}
 
 }

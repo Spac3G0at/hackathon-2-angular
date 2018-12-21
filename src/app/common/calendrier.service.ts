@@ -73,4 +73,10 @@ export class CalendrierService {
 		});
 	}
 
+	editEvent(event, eventId) {
+		this._http.put('/api/events/edit/' + eventId, event, { responseType: 'text' }).subscribe(x => {
+			this.getDates();
+		});
+	}
+
 }
