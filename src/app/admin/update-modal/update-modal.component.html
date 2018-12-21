@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<h4 class="modal-title">Modifier</h4>
-	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
 		<span aria-hidden="true">&times;</span>
 	</button>
 </div>
@@ -17,7 +17,7 @@
 				<ngb-timepicker formControlName="end"></ngb-timepicker>
 			</div>
 		</div>
-		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success">Modifier</button>
+		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success mb-3">Modifier</button>
 	</form>
 
 	<div *ngIf="data.event.attendees">
@@ -27,11 +27,11 @@
 	</div>
 
 	<button class="btn btn-danger" (click)="deleteEvent(eventId)">Supprimer</button>
-	<button *ngIf="data.event.colorId === '5'" class="btn btn-success" (click)="confirm(data.event.id, data.event)">Confirmer le rendez-vous</button>
+	<button *ngIf="data.event.colorId === '5'" class="btn btn-success mt-3" (click)="confirm(data.event.id, data.event)">Confirmer le rendez-vous</button>
 
 </div>
 <div class="modal-footer">
-	<button class="btn btn-danger" (click)="activeModal.dismiss('Close clicked')">
+	<button class="btn btn-danger" (click)="activeModal.dismiss()">
 		Annuler
 	</button>
 </div>

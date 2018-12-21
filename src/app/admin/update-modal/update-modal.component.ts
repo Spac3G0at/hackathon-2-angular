@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CalendrierService } from '../../common/calendrier.service';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-update-modal',
@@ -71,6 +72,10 @@ export class UpdateModalComponent implements OnInit {
 		};
 		this.service.editEvent(event, this.eventId);
 		this.closeModal();
+		Swal({
+			type: 'success',
+			title: 'Créneau modifié'
+		});
 	}
 
 	confirm(eventId, eventData) {
@@ -88,6 +93,10 @@ export class UpdateModalComponent implements OnInit {
 		};
 		this.service.confirm(eventId, event);
 		this.closeModal();
+		Swal({
+			type: 'success',
+			title: 'Le rendez-vous a bien été accepté !'
+		});
 	}
 
 

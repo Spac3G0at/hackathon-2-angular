@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CalendrierService } from '../common/calendrier.service';
+
 @Component({
 	selector: 'app-modal',
 	templateUrl: './modal.component.html',
