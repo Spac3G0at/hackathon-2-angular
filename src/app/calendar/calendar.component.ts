@@ -7,7 +7,7 @@ import {
 import { CalendrierService } from '../common/calendrier.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
-
+import { map, filter, mergeMap } from 'rxjs/operators';
 import { colors } from '../common/colors';
 
 @Component({
@@ -36,17 +36,29 @@ export class CalendarComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.service.getDates().subscribe((x: any) => {
-			this.events = x;
-			this.events.map(x => {
-				x.start = new Date(x.start.dateTime);
-				x.end = new Date(x.end.dateTime);
-				x.colorId = x.colorId ? x.colorId : '1';
-				x.color = colors.green;
-			});
-			this.events = this.events.filter(y => y.colorId === '2');
 
-		});
+		this.events = this.service.events.pipe(
+			map((x: any) => {
+				return x.filter(evt => {
+					return evt.colorId === '2';
+				}
+				);
+			}),
+			map((x: any) => {
+				return x.map(evt => {
+					evt.start = new Date(evt.start.dateTime);
+					evt.end = new Date(evt.end.dateTime);
+					evt.title = evt.summary;
+					evt.color = colors.green;
+					return evt;
+				});
+			}
+			),
+		);
+
+		this.service.getDates();
+
+
 	}
 
 

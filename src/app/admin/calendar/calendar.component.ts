@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../modal/modal.component';
 import { UpdateModalComponent } from '../update-modal/update-modal.component';
 import { colors } from '../../common/colors';
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-admin-calendar',
@@ -36,20 +37,28 @@ export class AdminCalendarComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.service.getDates().subscribe((x: any) => {
-			this.events = x;
-			this.events.map(x => {
-				x.start = new Date(x.start.dateTime);
-				x.end = new Date(x.end.dateTime);
-				x.title = x.summary;
-				console.log(x.title + x.colorId);
-				if (x.colorId === '2') {
-					x.color = colors.green;
-				} else if (x.colorId === '5') {
-					x.color = colors.yellow;
+
+		this.events = this.service.events.pipe(
+			map((x: any) => {
+					// this.events = x;
+					return x.map(evt => {
+						evt.start = new Date(evt.start.dateTime);
+						evt.end = new Date(evt.end.dateTime);
+						evt.title = evt.summary;
+						if (evt.colorId === '2') {
+							evt.color = colors.green;
+						} else if (evt.colorId === '5') {
+							evt.color = colors.yellow;
+						}
+
+						return evt;
+					});
 				}
-			});
-		});
+			)
+		);
+
+		this.service.getDates();
+
 	}
 
 	/**

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CalendrierService } from '../../common/calendrier.service';
-import { HttpClient } from 'selenium-webdriver/http';
 
 @Component({
 	selector: 'app-update-modal',
@@ -58,7 +57,6 @@ export class UpdateModalComponent implements OnInit {
 
 		const startDate = new Date(`${this.day} ${data.start.hour}:${data.start.minute}`).toISOString();
 		const endDate = new Date(`${this.day} ${data.end.hour}:${data.end.minute}`).toISOString();
-		console.log(startDate);
 		const event = {
 			start: {
 				dateTime: startDate,
@@ -68,17 +66,14 @@ export class UpdateModalComponent implements OnInit {
 			},
 			colorId: this.data.event.colorId,
 			summary: this.data.event.summary,
-			attendees: this.data.event.attendees
+			attendees: this.data.event.attendees,
+			description: this.data.event.description
 		};
 		this.service.updateEvent(event, this.eventId);
 		this.closeModal();
 	}
 
 	confirm(eventId, eventData) {
-		// const event = eventData;
-		// event.colorId = '1';
-		// console.log(eventData);
-
 		const event = {
 			start: {
 				dateTime: eventData.start.toISOString(),
@@ -88,9 +83,12 @@ export class UpdateModalComponent implements OnInit {
 			},
 			colorId: '1',
 			summary: eventData.summary,
-			attendees: eventData.attendees
+			attendees: eventData.attendees,
+			description: eventData.description
 		};
 		this.service.confirm(eventId, event);
+		this.closeModal();
 	}
+
 
 }

@@ -46,7 +46,7 @@ export class ModalComponent implements OnInit {
 
 		const startDate = new Date(`${this.day} ${data.start.hour}:${data.start.minute}`).toISOString();
 		const endDate = new Date(`${this.day} ${data.end.hour}:${data.end.minute}`).toISOString();
-		console.log(startDate);
+
 		const event = {
 			start: {
 				dateTime: startDate,

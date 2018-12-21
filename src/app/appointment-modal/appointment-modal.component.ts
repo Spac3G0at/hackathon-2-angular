@@ -47,6 +47,12 @@ export class AppointmentModalComponent implements OnInit {
 	 */
 	onSubmit() {
 		const data = this.myForm.value;
+		let desc = '';
+		if (data.company) {
+			desc = data.company + ' - ' + data.subject;
+		} else {
+			desc = data.subject;
+		}
 		const event = {
 			start: {
 				dateTime: this.data.event.start.toISOString(),
@@ -58,7 +64,8 @@ export class AppointmentModalComponent implements OnInit {
 			colorId: '5',
 			attendees: [{
 				email: data.mail
-			}]
+			}],
+			description: desc
 		};
 		this.service.updateEvent(event, this.eventId);
 

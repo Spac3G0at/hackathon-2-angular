@@ -17,12 +17,17 @@
 				<ngb-timepicker formControlName="end"></ngb-timepicker>
 			</div>
 		</div>
-		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success">Confirmer</button>
+		<button [disabled]="this.myForm.invalid" type="submit" class="btn btn-success">Modifier</button>
 	</form>
+
+	<div *ngIf="data.event.attendees">
+		<p>{{ data.event.summary }}</p>
+		<p>email : {{ data.event.attendees[0].email }}</p>
+		<p>{{ data.event.description }}</p>
+	</div>
 
 	<button class="btn btn-danger" (click)="deleteEvent(eventId)">Supprimer</button>
 	<button *ngIf="data.event.colorId === '5'" class="btn btn-success" (click)="confirm(data.event.id, data.event)">Confirmer le rendez-vous</button>
-	<button *ngIf="data.event.colorId === '1'" class="btn btn-success">Annuler le rendez-vous</button>
 
 </div>
 <div class="modal-footer">
