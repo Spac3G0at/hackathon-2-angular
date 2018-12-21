@@ -62,6 +62,11 @@ export class CalendrierService {
 		});
 	}
 
+	/**
+	 * Confirm an event
+	 * @param eventId event id
+	 * @param event event data
+	 */
 	confirm(eventId, event) {
 		this._http.put('/api/events/confirm/' + eventId, event, { responseType: 'text' }).subscribe(x => {
 			this.getDates();

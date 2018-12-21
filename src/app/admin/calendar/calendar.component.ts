@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-	CalendarEvent,
-	CalendarView,
-	DAYS_OF_WEEK
-} from 'angular-calendar';
+import { CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { CalendrierService } from '../../common/calendrier.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../../modal/modal.component';
@@ -40,7 +36,7 @@ export class AdminCalendarComponent implements OnInit {
 
 		this.events = this.service.events.pipe(
 			map((x: any) => {
-					// this.events = x;
+
 					return x.map(evt => {
 						evt.start = new Date(evt.start.dateTime);
 						evt.end = new Date(evt.end.dateTime);
@@ -65,13 +61,13 @@ export class AdminCalendarComponent implements OnInit {
 	 * Open modal for creating new events
 	 * @param data date data
 	 */
-	openFormModal(data) {
+	openCreateModal(data) {
 		const modalRef = this.modalService.open(ModalComponent);
 		modalRef.componentInstance.data = data;
 		modalRef.result.then((result) => {
-			// console.log(result);
+
 		}).catch((error) => {
-			// console.log(error);
+			console.log(error);
 		});
 	}
 
@@ -79,13 +75,13 @@ export class AdminCalendarComponent implements OnInit {
 	 * Edit event
 	 * @param data event data
 	 */
-	openModal(data) {
+	openEditModal(data) {
 		const modalRef = this.modalService.open(UpdateModalComponent);
 		modalRef.componentInstance.data = data;
 		modalRef.result.then((result) => {
-			// console.log(result);
+
 		}).catch((error) => {
-			// console.log(error);
+			console.log(error);
 		});
 	}
 
@@ -104,7 +100,7 @@ export class AdminCalendarComponent implements OnInit {
 	 * @param event data
 	 */
 	createEvent(event) {
-		this.openFormModal(event);
+		this.openCreateModal(event);
 	}
 
 	/**
@@ -112,12 +108,7 @@ export class AdminCalendarComponent implements OnInit {
 	 * @param event data
 	 */
 	edit(event) {
-		this.openModal(event);
-	}
-
-
-	eventClicked({ event }: { event: CalendarEvent }): void {
-		console.log('Event clicked', event);
+		this.openEditModal(event);
 	}
 
 }

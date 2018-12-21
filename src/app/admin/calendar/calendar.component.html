@@ -21,7 +21,6 @@
 			  [events]="events"
 			  [refresh]="refresh"
 			  (dayClicked)="changeView($event.day.date)"
-			  (eventClicked)="eventClicked($event)"
 			  (eventTimesChanged)="eventTimesChanged($event)"
 			  [locale]="locale">
 			</mwl-calendar-month-view>
@@ -34,6 +33,8 @@
 			  (eventClicked)="edit($event)"
 			  (eventTimesChanged)="eventTimesChanged($event)"
 			  (hourSegmentClicked)="createEvent($event)"
+			  [dayStartHour]="9"
+  			  [dayEndHour]="18"
 			  [locale]="locale">
 			</mwl-calendar-week-view>
 			<mwl-calendar-day-view
@@ -45,6 +46,8 @@
 			  (eventClicked)="edit($event)"
 			  (eventTimesChanged)="eventTimesChanged($event)"
 			  (hourSegmentClicked)="createEvent($event)"
+			  [dayStartHour]="9"
+  			  [dayEndHour]="18"
 			  [locale]="locale">
 			</mwl-calendar-day-view>
 	</div>
