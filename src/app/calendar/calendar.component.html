@@ -21,6 +21,7 @@
 			  (dayClicked)="changeView($event.day.date)"
 			  (eventClicked)="eventClicked($event)"
 			  (eventTimesChanged)="eventTimesChanged($event)"
+			  [excludeDays]="excludeDays"
 			  [locale]="locale">
 			</mwl-calendar-month-view>
 			<mwl-calendar-week-view
@@ -32,7 +33,8 @@
 			  (eventClicked)="takeAppointment($event)"
 			  (eventTimesChanged)="eventTimesChanged($event)"
 			  [dayStartHour]="9"
-  			  [dayEndHour]="18"
+			  [dayEndHour]="18"
+			  [excludeDays]="excludeDays"
 			  [locale]="locale">
 			</mwl-calendar-week-view>
 			<mwl-calendar-day-view

@@ -16,6 +16,11 @@ export class AdminCalendarComponent implements OnInit {
 
 	events: any;
 
+	// exclude weekends
+	excludeDays: number[] = [0, 6];
+
+	weekStartsOn = DAYS_OF_WEEK.SUNDAY;
+
 	view: CalendarView = CalendarView.Month;
 	activeDayIsOpen = true;
 	CalendarView = CalendarView;
@@ -23,10 +28,6 @@ export class AdminCalendarComponent implements OnInit {
 	viewDate: Date = new Date();
 
 	locale = 'fr';
-
-	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-
-	weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
 	constructor(private service: CalendrierService, private modalService: NgbModal) {
 
@@ -37,19 +38,19 @@ export class AdminCalendarComponent implements OnInit {
 		this.events = this.service.events.pipe(
 			map((x: any) => {
 
-					return x.map(evt => {
-						evt.start = new Date(evt.start.dateTime);
-						evt.end = new Date(evt.end.dateTime);
-						evt.title = evt.summary;
-						if (evt.colorId === '2') {
-							evt.color = colors.green;
-						} else if (evt.colorId === '5') {
-							evt.color = colors.yellow;
-						}
+				return x.map(evt => {
+					evt.start = new Date(evt.start.dateTime);
+					evt.end = new Date(evt.end.dateTime);
+					evt.title = evt.summary;
+					if (evt.colorId === '2') {
+						evt.color = colors.green;
+					} else if (evt.colorId === '5') {
+						evt.color = colors.yellow;
+					}
 
-						return evt;
-					});
-				}
+					return evt;
+				});
+			}
 			)
 		);
 

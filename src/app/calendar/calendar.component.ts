@@ -18,6 +18,10 @@ import { colors } from '../common/colors';
 export class CalendarComponent implements OnInit {
 
 	events: any;
+	// exclude weekends
+	excludeDays: number[] = [0, 6];
+
+	weekStartsOn = DAYS_OF_WEEK.SUNDAY;
 
 	view: CalendarView = CalendarView.Month;
 	activeDayIsOpen = true;
@@ -26,10 +30,6 @@ export class CalendarComponent implements OnInit {
 	viewDate: Date = new Date();
 
 	locale = 'fr';
-
-	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
-
-	weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
 	constructor(private service: CalendrierService, private modalService: NgbModal) {
 
@@ -53,48 +53,48 @@ export class CalendarComponent implements OnInit {
 				});
 			}
 			),
-		);
+			);
 
-		this.service.getDates();
+			this.service.getDates();
 
+
+		}
+
+
+		/**
+		* Open the appointment modal
+		* @param data event data
+		*/
+		openModal(data) {
+			const modalRef = this.modalService.open(AppointmentModalComponent);
+			modalRef.componentInstance.data = data;
+			modalRef.result.then((result) => {
+				// console.log(result);
+			}).catch((error) => {
+				// console.log(error);
+			});
+		}
+
+		/**
+		* Change view to day
+		* @param event date
+		*/
+		changeView(event) {
+			this.view = CalendarView.Day;
+			this.viewDate = event;
+		}
+
+		/**
+		* Open the appointment modal
+		* @param event data
+		*/
+		takeAppointment(event) {
+			this.openModal(event);
+		}
+
+
+		eventClicked({ event }: { event: CalendarEvent }): void {
+			console.log('Event clicked', event);
+		}
 
 	}
-
-
-	/**
-	 * Open the appointment modal
-	 * @param data event data
-	 */
-	openModal(data) {
-		const modalRef = this.modalService.open(AppointmentModalComponent);
-		modalRef.componentInstance.data = data;
-		modalRef.result.then((result) => {
-			// console.log(result);
-		}).catch((error) => {
-			// console.log(error);
-		});
-	}
-
-	/**
-	 * Change view to day
-	 * @param event date
-	 */
-	changeView(event) {
-		this.view = CalendarView.Day;
-		this.viewDate = event;
-	}
-
-	/**
-	 * Open the appointment modal
-	 * @param event data
-	 */
-	takeAppointment(event) {
-		this.openModal(event);
-	}
-
-
-	eventClicked({ event }: { event: CalendarEvent }): void {
-		console.log('Event clicked', event);
-	}
-
-}

@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'mwl-demo-utils-calendar-header',
-  template: `
+	selector: 'mwl-demo-utils-calendar-header',
+	template: `
     <div class="row text-center">
       <div class="col-md-4">
         <div class="btn-group">
@@ -10,7 +10,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
             class="btn btn-primary"
             mwlCalendarPreviousView
             [view]="view"
-            [(viewDate)]="viewDate"
+			[(viewDate)]="viewDate"
+			[excludeDays]="excludeDays"
             (viewDateChange)="viewDateChange.next(viewDate)">
             Précédent
           </div>
@@ -24,7 +25,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
           <div
             class="btn btn-primary"
             mwlCalendarNextView
-            [view]="view"
+			[view]="view"
+			[excludeDays]="excludeDays"
             [(viewDate)]="viewDate"
             (viewDateChange)="viewDateChange.next(viewDate)">
             Suivant
@@ -61,18 +63,21 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   `
 })
 export class CalendarHeaderComponent {
-  @Input()
-  view: string;
+	@Input()
+	view: string;
 
-  @Input()
-  viewDate: Date;
+	@Input()
+	viewDate: Date;
 
-  @Input()
-  locale: string = 'en';
+	@Input()
+	locale: string = 'en';
 
-  @Output()
-  viewChange: EventEmitter<string> = new EventEmitter();
+	// exclude weekends
+	excludeDays: number[] = [0, 6];
 
-  @Output()
-  viewDateChange: EventEmitter<Date> = new EventEmitter();
+	@Output()
+	viewChange: EventEmitter<string> = new EventEmitter();
+
+	@Output()
+	viewDateChange: EventEmitter<Date> = new EventEmitter();
 }
