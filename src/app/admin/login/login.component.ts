@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/common/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-login',
@@ -25,7 +26,11 @@ export class LoginComponent implements OnInit {
 		if (this.service.login(data.email, data.password)) {
 			this.router.navigate(['/admin/calendar']);
 		} else {
-			console.log('Uh ?');
+			Swal({
+				type: 'error',
+				title: 'Adresse mail ou mot de passe incorrect'
+			});
+			this.loginForm.reset();
 		}
 	}
 
